@@ -1,0 +1,13 @@
+<h2>Testando Services</h2>
+
+<h3>Filmes</h3>
+<ul>
+  <li *ngFor="let movie of movies">
+    <strong>{{ movie.title }}</strong> - {{ movie.genre }} ({{ movie.releaseYear }})
+  </li>
+</ul>
+
+<h3>Login</h3>
+<p>Status: {{ isLoggedIn ? 'Logado' : 'Deslogado' }}</p>
+<button (click)="login()" *ngIf="!isLoggedIn">Login</button>
+<button (click)="logout()" *ngIf="isLoggedIn">Logout</button>
