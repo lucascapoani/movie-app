@@ -4,9 +4,25 @@ import { Movie } from '../models/movie.model';
 @Injectable({ providedIn: 'root' })
 export class MovieService {
   private movies: Movie[] = [
-    { id: 1, title: 'Matrix', description: 'Sci-fi clássico', genre: 'Ficção', releaseYear: 1999, rating: 4.8 },
-    { id: 2, title: 'O Senhor dos Anéis', description: 'Fantasia épica', genre: 'Aventura', releaseYear: 2001, rating: 4.9 },
+    { 
+      id: 1, 
+      title: 'Matrix', 
+      description: 'Sci-fi clássico', 
+      genre: 'Ficção', 
+      releaseYear: 1999, 
+      rating: 4.8 
+    },
+    { 
+      id: 2, 
+      title: 'O Senhor dos Anéis', 
+      description: 'Fantasia épica', 
+      genre: 'Aventura', 
+      releaseYear: 2001, 
+      rating: 4.9 
+    }
   ];
+
+  private nextId = 3;
 
   getAll(): Movie[] {
     return this.movies;
@@ -17,7 +33,8 @@ export class MovieService {
   }
 
   add(movie: Movie): void {
-    this.movies.push({ ...movie, id: Date.now() });
+    movie.id = this.nextId++;
+    this.movies.push({ ...movie });
   }
 
   update(movie: Movie): void {
