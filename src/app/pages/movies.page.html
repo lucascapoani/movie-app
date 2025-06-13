@@ -4,6 +4,16 @@
   <form (ngSubmit)="save()" #movieForm="ngForm" class="mb-4">
 
     <div class="mb-3">
+      <input 
+        type="text"
+        name="search"
+        [(ngModel)]="searchTerm"
+        class="form-control"
+        placeholder="Buscar por título"
+      />
+    </div>
+
+    <div class="mb-3">
       <label for="title" class="form-label">Título</label>
       <input
         id="title"
@@ -109,7 +119,7 @@
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let movie of movies">
+      <tr *ngFor="let movie of filteredMovies">
         <td>{{ movie.title }}</td>
         <td>{{ movie.description }}</td>
         <td>{{ movie.genre }}</td>
