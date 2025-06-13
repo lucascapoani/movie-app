@@ -16,6 +16,7 @@ export class MoviesPage {
   movies: Movie[] = [];
   editing = false;
   movie: Movie = this.emptyMovie();
+  searchTerm = '';
 
   constructor(private movieService: MovieService) {
     this.loadMovies();
@@ -39,8 +40,10 @@ export class MoviesPage {
   save(): void {
     if (this.editing) {
       this.movieService.update(this.movie);
+      alert('Filme atualizado com sucesso!');
     } else {
       this.movieService.add(this.movie);
+      alert('Filme adicionado com sucesso!');
     }
     this.clearForm();
     this.loadMovies();
@@ -52,12 +55,19 @@ export class MoviesPage {
   }
 
   delete(id: number): void {
-    this.movieService.delete(id);
-    this.loadMovies();
+    if (confirm('Deseja realmente excluir este filme?')) {
+      this.movieService.delete(id);
+      this.loadMovies();
+    }
   }
 
   clearForm(): void {
     this.movie = this.emptyMovie();
     this.editing = false;
+  }
+
+  get filteredMovies(): Movie[] {
+    const term = this.searchTerm.toLowerCase().trim();
+    return this.movies.filter(m => m.title.toLowerCase().includes(term));
   }
 }
